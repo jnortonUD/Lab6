@@ -151,7 +151,7 @@ public class BlackJackController implements Initializable {
 			}
 		});
 
-		// 	Add the sequential transistion to the main sequential transision and play
+		// 	Add the sequential transition to the main sequential transition and play
 		seqDealTable.getChildren().add(seqDeal);
 
 		seqDealTable.setInterpolator(Interpolator.EASE_OUT);
@@ -291,11 +291,12 @@ public class BlackJackController implements Initializable {
 		//TODO: Fix the Path transition.  My Path looks terrible...  do something cool :)
 		
 		path.getElements().add(new MoveTo(fromPoint.getX(), fromPoint.getY()));
-		path.getElements().add(new CubicCurveTo(toPoint.getX() * 2, toPoint.getY() * 2, toPoint.getX() / 3,
-				toPoint.getY() / 3, toPoint.getX(), toPoint.getY()));
-		// path.getElements().add(new CubicCurveTo(0, 120, 0, 240, 380, 240));
+		path.getElements().add(new CubicCurveTo(fromPoint.getX(), (fromPoint.getY()+toPoint.getY()) / 2, 
+				(toPoint.getX()+fromPoint.getX()) / 2, toPoint.getY(), toPoint.getX(), toPoint.getY()));
+		path.getElements().add(new CubicCurveTo(toPoint.getX() * 2 - fromPoint.getX(), (fromPoint.getY()+toPoint.getY()*3)/4, 
+				(toPoint.getX()+(toPoint.getX() * 2 - fromPoint.getX()) / 2) / 2, (fromPoint.getY()+toPoint.getY())/2, toPoint.getX(), toPoint.getY()));
 		PathTransition pathTransition = new PathTransition();
-		pathTransition.setDuration(Duration.millis(750));
+		pathTransition.setDuration(Duration.millis(800));
 		pathTransition.setPath(path);
 		pathTransition.setNode(img);
 		pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
